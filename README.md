@@ -17,28 +17,55 @@ under `audio/h3`. Drop it between your `LoadAudio` and the reference-audio input
 
 ## The measurement
 
-| | |
-|---|---|
-| the reference's opening burst | **0.36×** speech RMS, **15.2×** above the gap that follows |
-| renders that reproduced it | **24 of 24** (median 15.3×, all above 3×) |
-| Whisper transcribing a spurious word before the line | **16 of 24** |
-| zeroing the first 200 ms of the reference | burst drops to **0.2×** — **3 of 3** |
+The claim is not "the head is loud." It is that **the render copies the first ~320 ms of the
+specific wav you bound**, and the control is what makes that readable:
 
-The duration is preserved — the window is silenced, not cut — so the audio clock cannot shift.
-A short cosine ramp follows the silenced window so the cut does not itself become a new click.
+| each render's first 320 ms, cross-correlated against… | Pearson r |
+|---|---:|
+| **its own bound reference wav** | **0.76 – 0.92** |
+| the *other* character's wav | **0.013 – 0.024** |
 
-The node returns a `report` string with the measured head peak before and after, so it states its
-own evidence in the UI rather than asking you to trust it.
+That separation is the whole result. The correlation is to that file, not to speech in general.
+
+Two shots with **byte-identical prompts**, differing only in the bound wav, made it visible: their
+reference heads sit **39.2 dB vs 3.8 dB** above floor, and the render heads follow almost exactly.
+The two wavs are **bit-identical from 0.32 s onward** — one is simply the other with its first
+199.7 ms zeroed.
+
+**On the amplitude endpoint** (measured earlier, separately): the reference opens at **0.36×**
+speech RMS, **15.2×** above the gap that follows; **24 of 24** renders reproduced it above 3×;
+Whisper transcribed a spurious word before the line in **16 of 24**. Zeroing the leading 200 ms
+dropped it to 0.2×, **3 of 3**.
+
+### Two things that took us a while, and will save you the same time
+
+**1. It is seed-dependent — 2 of 6 seeds skipped the copy entirely** (r = 0.115 and 0.080 against
+their own wav). Those two looked like the *best* result in a before/after comparison, with the
+largest apparent reduction of the set — **their heads were quiet because they skipped the copy, not
+because anything fixed it.** A reduction number alone mis-attributes in both directions. Check the
+mechanism, not the delta.
+
+**2. The copy is not the defect — a loud reference head is.** One shot correlates at r = 0.83 and
+is completely inaudible, because its reference head is only 3.8 dB above floor: there is nothing
+loud to copy. This is *why* zeroing the head is the right fix rather than trying to suppress the
+copy — you remove what there is to copy.
+
+The duration is preserved — the window is silenced, not cut — so the audio clock cannot shift. A
+short cosine ramp follows so the cut does not itself become a new click. The node returns a
+`report` string with the measured head peak before and after, so it states its own evidence in the
+UI rather than asking you to trust it.
 
 ### Scope, honestly
 
-- This addresses **one** of several things that can go wrong at the head of an H3 render. It is
-  the *reference-copy* defect specifically. Do not assume it explains every head artefact you hear.
-- **A source separator is not a substitute.** Music-bed removal (e.g. htdemucs) is a different
-  axis and it is not sample-exact: run on an already-zeroed file it bled ~0.002 back into a window
-  that had been exactly 0.000000. If you clean *and* trim, trim **after** cleaning, then verify the
-  head is still exactly zero.
-- Numbers above were measured on one box (RTX PRO 6000, ComfyUI v0.32.0, H3 ref2va int8).
+- This addresses **one** of several things that can go wrong at the head of an H3 render, and we
+  have separated three. A prompt-caused burst from `<d></d>` dialogue tags (~24 dB, 20/20) is a
+  *different* defect with a different fix, and a ~19.6 ms silence-then-step at t=0 is a third whose
+  cause is still unresolved. **Do not merge them** — we did, for two sessions, and it cost us.
+- **A source separator is not a substitute.** Music-bed removal (e.g. htdemucs) is a different axis
+  and it is not sample-exact: run on an already-zeroed file it bled ~0.002 back into a window that
+  had been exactly 0.000000. If you clean *and* trim, trim **after** cleaning, then verify the head
+  is still exactly zero.
+- Measured on one box: RTX PRO 6000, ComfyUI v0.32.0, H3 ref2va int8.
 
 ---
 
