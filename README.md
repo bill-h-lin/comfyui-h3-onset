@@ -107,8 +107,13 @@ clean diff is not evidence the graph will run.**
 | attention | Sage via the **node**, never the launch flag | the global `--use-sage-attention` flag swaps module-level attention for everything, and the audio VAE calls it |
 
 **Dependency note:** the graph includes `PathchSageAttentionKJ` from
-[KJNodes](https://github.com/kijai/ComfyUI-KJNodes). Remove or bypass that node and the graph runs
-unchanged on stock ComfyUI — it is a speed path, not part of the result.
+[KJNodes](https://github.com/kijai/ComfyUI-KJNodes) — this is the sanctioned route to Sage
+attention, as opposed to the global `--use-sage-attention` launch flag, which swaps module-level
+attention for everything including the audio VAE. Bypass the node if you do not have KJNodes
+installed and the graph runs on stock ComfyUI. ⚠️ **Every render in this entry was made with it
+active, and I have not measured whether bypassing it changes the output** — attention kernels are
+not numerically identical, so treat a bypassed run as a different configuration, not as a
+reproduction.
 
 ### The rule that is not visible in the graph
 
