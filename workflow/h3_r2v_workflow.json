@@ -1,0 +1,1972 @@
+{
+ "id": "00000000-0000-0000-0000-000000000000",
+ "revision": 0,
+ "last_node_id": 25,
+ "last_link_id": 42,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "UNETLoader",
+   "pos": [
+    100,
+    130
+   ],
+   "size": [
+    270,
+    82
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "unet_name",
+     "locked": null,
+     "name": "unet_name",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "unet_name"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "weight_dtype",
+     "locked": null,
+     "name": "weight_dtype",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "weight_dtype"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "MODEL",
+     "locked": null,
+     "name": "MODEL",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "MODEL",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      42
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "UNETLoader"
+   },
+   "widgets_values": [
+    "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+    "default"
+   ]
+  },
+  {
+   "id": 2,
+   "type": "CLIPLoader",
+   "pos": [
+    100,
+    342
+   ],
+   "size": [
+    270,
+    106
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "clip_name",
+     "locked": null,
+     "name": "clip_name",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "clip_name"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "type",
+     "locked": null,
+     "name": "type",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "type"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "device",
+     "locked": null,
+     "name": "device",
+     "nameLocked": null,
+     "removable": null,
+     "shape": 7,
+     "type": "COMBO",
+     "widget": {
+      "name": "device"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "CLIP",
+     "locked": null,
+     "name": "CLIP",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "CLIP",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      22
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CLIPLoader"
+   },
+   "widgets_values": [
+    "qwen3vl_32b_minimax_h3_bf16.safetensors",
+    "minimax",
+    "default"
+   ]
+  },
+  {
+   "id": 3,
+   "type": "VAELoader",
+   "pos": [
+    100,
+    578
+   ],
+   "size": [
+    270,
+    58
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "vae_name",
+     "locked": null,
+     "name": "vae_name",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "vae_name"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "VAE",
+     "locked": null,
+     "name": "VAE",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "VAE",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      23,
+      36
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "minimax_h3_video_vae_fp16.safetensors"
+   ]
+  },
+  {
+   "id": 4,
+   "type": "VAELoader",
+   "pos": [
+    100,
+    766
+   ],
+   "size": [
+    270,
+    58
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "vae_name",
+     "locked": null,
+     "name": "vae_name",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "vae_name"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "VAE",
+     "locked": null,
+     "name": "VAE",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "VAE",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      24,
+      38
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "minimax_h3_audio_vae_fp32.safetensors"
+   ]
+  },
+  {
+   "id": 5,
+   "type": "MiniMaxH3ReferenceToVideo",
+   "pos": [
+    480,
+    342
+   ],
+   "size": [
+    400,
+    344
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "clip",
+     "locked": null,
+     "name": "clip",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "CLIP",
+     "pos": null,
+     "link": 22
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "vae",
+     "locked": null,
+     "name": "vae",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "VAE",
+     "pos": null,
+     "link": 23
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "audio_vae",
+     "locked": null,
+     "name": "audio_vae",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "VAE",
+     "pos": null,
+     "link": 24
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": "ref_image_0",
+     "localized_name": "ref_images.ref_image_0",
+     "locked": null,
+     "name": "ref_images.ref_image_0",
+     "nameLocked": null,
+     "removable": null,
+     "shape": 7,
+     "type": "IMAGE",
+     "pos": null,
+     "link": 25
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": "ref_image_1",
+     "localized_name": "ref_images.ref_image_1",
+     "locked": null,
+     "name": "ref_images.ref_image_1",
+     "nameLocked": null,
+     "removable": null,
+     "shape": 7,
+     "type": "IMAGE",
+     "pos": null,
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": "ref_video_0",
+     "localized_name": "ref_videos.ref_video_0",
+     "locked": null,
+     "name": "ref_videos.ref_video_0",
+     "nameLocked": null,
+     "removable": null,
+     "shape": 7,
+     "type": "IMAGE",
+     "pos": null,
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": "ref_video_audio_0",
+     "localized_name": "ref_video_audios.ref_video_audio_0",
+     "locked": null,
+     "name": "ref_video_audios.ref_video_audio_0",
+     "nameLocked": null,
+     "removable": null,
+     "shape": 7,
+     "type": "AUDIO",
+     "pos": null,
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": "ref_audio_0",
+     "localized_name": "ref_audios.ref_audio_0",
+     "locked": null,
+     "name": "ref_audios.ref_audio_0",
+     "nameLocked": null,
+     "removable": null,
+     "shape": 7,
+     "type": "AUDIO",
+     "pos": null,
+     "link": 26
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": "ref_audio_1",
+     "localized_name": "ref_audios.ref_audio_1",
+     "locked": null,
+     "name": "ref_audios.ref_audio_1",
+     "nameLocked": null,
+     "removable": null,
+     "shape": 7,
+     "type": "AUDIO",
+     "pos": null,
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "prompt",
+     "locked": null,
+     "name": "prompt",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "STRING",
+     "widget": {
+      "name": "prompt"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "width",
+     "locked": null,
+     "name": "width",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "INT",
+     "widget": {
+      "name": "width"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "height",
+     "locked": null,
+     "name": "height",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "INT",
+     "widget": {
+      "name": "height"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "length",
+     "locked": null,
+     "name": "length",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "INT",
+     "widget": {
+      "name": "length"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "ref_image_size",
+     "locked": null,
+     "name": "ref_image_size",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "ref_image_size"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "positive",
+     "locked": null,
+     "name": "positive",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "CONDITIONING",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      29
+     ]
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "LATENT",
+     "locked": null,
+     "name": "LATENT",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "LATENT",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      34
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+   },
+   "widgets_values": [
+    "integrated_multimodal_description: [Shot 1] Live-action, cinematic, with shallow depth of field. Use <Picture 1> as the exact appearance reference for the woman in this shot: the same face, the same loosely pinned dark hair, the same charcoal wool cardigan worn over a plain white shirt. Use <Audio 1> as the exact reference for her speaking voice. A medium shot frames her standing behind the glass counter of a small clock shop in the late morning, clear daylight falling through the shopfront window at her left across rows of wall clocks and mantel clocks on the wall behind her. She holds a finished pocket watch up by its chain at chest height and lets it turn slowly, then looks straight into the camera. The camera is static. The watchmaker, a woman with a low, steady, slightly hushed voice (S1), says: <d>[English] Forty years, and it still surprises me.</d> She closes her hand around the watch and a small, tired smile forms at the corner of her mouth.\n\noverall_soundscape: The layered, uneven ticking of many clocks fills the room over a quiet street ambience carrying faintly through the shopfront glass. A thin metallic rattle as the pocket watch turns on its chain, and fabric rustles softly as she lowers her hand.",
+    1344,
+    768,
+    124,
+    "match"
+   ]
+  },
+  {
+   "id": 6,
+   "type": "BasicScheduler",
+   "pos": [
+    980,
+    130
+   ],
+   "size": [
+    270,
+    106
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "model",
+     "locked": null,
+     "name": "model",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "MODEL",
+     "pos": null,
+     "link": 27
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "scheduler",
+     "locked": null,
+     "name": "scheduler",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "scheduler"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "steps",
+     "locked": null,
+     "name": "steps",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "INT",
+     "widget": {
+      "name": "steps"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "denoise",
+     "locked": null,
+     "name": "denoise",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "FLOAT",
+     "widget": {
+      "name": "denoise"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "SIGMAS",
+     "locked": null,
+     "name": "SIGMAS",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "SIGMAS",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      33
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "BasicScheduler"
+   },
+   "widgets_values": [
+    "simple",
+    8,
+    1
+   ]
+  },
+  {
+   "id": 7,
+   "type": "KSamplerSelect",
+   "pos": [
+    100,
+    954
+   ],
+   "size": [
+    270,
+    58
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "sampler_name",
+     "locked": null,
+     "name": "sampler_name",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "sampler_name"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "SAMPLER",
+     "locked": null,
+     "name": "SAMPLER",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "SAMPLER",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      32
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSamplerSelect"
+   },
+   "widgets_values": [
+    "res_multistep"
+   ]
+  },
+  {
+   "id": 8,
+   "type": "BasicGuider",
+   "pos": [
+    980,
+    366
+   ],
+   "size": [
+    159,
+    46
+   ],
+   "flags": {},
+   "order": 11,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "model",
+     "locked": null,
+     "name": "model",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "MODEL",
+     "pos": null,
+     "link": 28
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "conditioning",
+     "locked": null,
+     "name": "conditioning",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "CONDITIONING",
+     "pos": null,
+     "link": 29
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "GUIDER",
+     "locked": null,
+     "name": "GUIDER",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "GUIDER",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      31
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "BasicGuider"
+   }
+  },
+  {
+   "id": 9,
+   "type": "RandomNoise",
+   "pos": [
+    100,
+    1142
+   ],
+   "size": [
+    270,
+    82
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "noise_seed",
+     "locked": null,
+     "name": "noise_seed",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "INT",
+     "widget": {
+      "name": "noise_seed"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "NOISE",
+     "locked": null,
+     "name": "NOISE",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "NOISE",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      30
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RandomNoise"
+   },
+   "widgets_values": [
+    20260806,
+    "randomize"
+   ]
+  },
+  {
+   "id": 10,
+   "type": "SamplerCustomAdvanced",
+   "pos": [
+    1350,
+    130
+   ],
+   "size": [
+    211.9,
+    106
+   ],
+   "flags": {},
+   "order": 12,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "noise",
+     "locked": null,
+     "name": "noise",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "NOISE",
+     "pos": null,
+     "link": 30
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "guider",
+     "locked": null,
+     "name": "guider",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "GUIDER",
+     "pos": null,
+     "link": 31
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "sampler",
+     "locked": null,
+     "name": "sampler",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "SAMPLER",
+     "pos": null,
+     "link": 32
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "sigmas",
+     "locked": null,
+     "name": "sigmas",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "SIGMAS",
+     "pos": null,
+     "link": 33
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "latent_image",
+     "locked": null,
+     "name": "latent_image",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "LATENT",
+     "pos": null,
+     "link": 34
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "output",
+     "locked": null,
+     "name": "output",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "LATENT",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      35,
+      37
+     ]
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "denoised_output",
+     "locked": null,
+     "name": "denoised_output",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "LATENT",
+     "pos": null,
+     "slot_index": null,
+     "links": null
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "SamplerCustomAdvanced"
+   }
+  },
+  {
+   "id": 11,
+   "type": "VAEDecode",
+   "pos": [
+    1661.9,
+    130
+   ],
+   "size": [
+    140,
+    46
+   ],
+   "flags": {},
+   "order": 13,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "samples",
+     "locked": null,
+     "name": "samples",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "LATENT",
+     "pos": null,
+     "link": 35
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "vae",
+     "locked": null,
+     "name": "vae",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "VAE",
+     "pos": null,
+     "link": 36
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "IMAGE",
+     "locked": null,
+     "name": "IMAGE",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "IMAGE",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      39
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecode"
+   }
+  },
+  {
+   "id": 12,
+   "type": "VAEDecodeAudio",
+   "pos": [
+    1661.9,
+    306
+   ],
+   "size": [
+    163.9,
+    46
+   ],
+   "flags": {},
+   "order": 14,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "samples",
+     "locked": null,
+     "name": "samples",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "LATENT",
+     "pos": null,
+     "link": 37
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "vae",
+     "locked": null,
+     "name": "vae",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "VAE",
+     "pos": null,
+     "link": 38
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "AUDIO",
+     "locked": null,
+     "name": "AUDIO",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "AUDIO",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      40
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecodeAudio"
+   }
+  },
+  {
+   "id": 13,
+   "type": "CreateVideo",
+   "pos": [
+    1925.8000000000002,
+    130
+   ],
+   "size": [
+    270,
+    102
+   ],
+   "flags": {},
+   "order": 15,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "images",
+     "locked": null,
+     "name": "images",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "IMAGE",
+     "pos": null,
+     "link": 39
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "audio",
+     "locked": null,
+     "name": "audio",
+     "nameLocked": null,
+     "removable": null,
+     "shape": 7,
+     "type": "AUDIO",
+     "pos": null,
+     "link": 40
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "fps",
+     "locked": null,
+     "name": "fps",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "FLOAT",
+     "widget": {
+      "name": "fps"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "bit_depth",
+     "locked": null,
+     "name": "bit_depth",
+     "nameLocked": null,
+     "removable": null,
+     "shape": 7,
+     "type": "INT",
+     "widget": {
+      "name": "bit_depth"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "VIDEO",
+     "locked": null,
+     "name": "VIDEO",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "VIDEO",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      41
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CreateVideo"
+   },
+   "widgets_values": [
+    24,
+    8
+   ]
+  },
+  {
+   "id": 14,
+   "type": "SaveVideo",
+   "pos": [
+    2295.8,
+    130
+   ],
+   "size": [
+    270,
+    106
+   ],
+   "flags": {},
+   "order": 16,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "video",
+     "locked": null,
+     "name": "video",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "VIDEO",
+     "pos": null,
+     "link": 41
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "filename_prefix",
+     "locked": null,
+     "name": "filename_prefix",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "STRING",
+     "widget": {
+      "name": "filename_prefix"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "format",
+     "locked": null,
+     "name": "format",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "format"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "codec",
+     "locked": null,
+     "name": "codec",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMFY_DYNAMICCOMBO_V3",
+     "widget": {
+      "name": "codec"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "video",
+     "locked": null,
+     "name": "video",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "VIDEO",
+     "pos": null,
+     "slot_index": null,
+     "links": null
+    }
+   ],
+   "properties": {},
+   "widgets_values": [
+    "video/h3_r2v_s8_sage",
+    "auto",
+    "auto"
+   ]
+  },
+  {
+   "id": 16,
+   "type": "PathchSageAttentionKJ",
+   "pos": [
+    480,
+    130
+   ],
+   "size": [
+    270,
+    82
+   ],
+   "flags": {},
+   "order": 8,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "model",
+     "locked": null,
+     "name": "model",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "MODEL",
+     "pos": null,
+     "link": 42
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "sage_attention",
+     "locked": null,
+     "name": "sage_attention",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "sage_attention"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "allow_compile",
+     "locked": null,
+     "name": "allow_compile",
+     "nameLocked": null,
+     "removable": null,
+     "shape": 7,
+     "type": "BOOLEAN",
+     "widget": {
+      "name": "allow_compile"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "MODEL",
+     "locked": null,
+     "name": "MODEL",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "MODEL",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      27,
+      28
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PathchSageAttentionKJ"
+   },
+   "widgets_values": [
+    "auto",
+    false
+   ]
+  },
+  {
+   "id": 20,
+   "type": "LoadImage",
+   "pos": [
+    100,
+    1354
+   ],
+   "size": [
+    280,
+    102
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "image",
+     "locked": null,
+     "name": "image",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "image"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "choose file to upload",
+     "locked": null,
+     "name": "upload",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "IMAGEUPLOAD",
+     "widget": {
+      "name": "upload"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "IMAGE",
+     "locked": null,
+     "name": "IMAGE",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "IMAGE",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      25
+     ]
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "MASK",
+     "locked": null,
+     "name": "MASK",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "MASK",
+     "pos": null,
+     "slot_index": null,
+     "links": null
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "char1_ref.png",
+    "image"
+   ]
+  },
+  {
+   "id": 21,
+   "type": "LoadAudio",
+   "pos": [
+    100,
+    1586
+   ],
+   "size": [
+    280,
+    136
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "showAdvanced": null,
+   "inputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "audio",
+     "locked": null,
+     "name": "audio",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "COMBO",
+     "widget": {
+      "name": "audio"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "audioUI",
+     "locked": null,
+     "name": "audioUI",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "AUDIO_UI",
+     "widget": {
+      "name": "audioUI"
+     },
+     "link": null
+    },
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "choose file to upload",
+     "locked": null,
+     "name": "upload",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "AUDIOUPLOAD",
+     "widget": {
+      "name": "upload"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "color_off": null,
+     "color_on": null,
+     "dir": null,
+     "label": null,
+     "localized_name": "AUDIO",
+     "locked": null,
+     "name": "AUDIO",
+     "nameLocked": null,
+     "removable": null,
+     "shape": null,
+     "type": "AUDIO",
+     "pos": null,
+     "slot_index": null,
+     "links": [
+      26
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadAudio"
+   },
+   "widgets_values": [
+    "char1_voice_clean_trim.wav",
+    null,
+    ""
+   ]
+  },
+  {
+   "id": 22,
+   "type": "MarkdownNote",
+   "pos": [
+    -1780,
+    130
+   ],
+   "size": [
+    450,
+    760
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "Note: Before the Word \u2014 reference-to-video with native audio",
+   "properties": {},
+   "widgets_values": [
+    "## Before the Word \u2014 reference-to-video with native audio\n\nThis is the exact graph every shot in this entry was rendered with. It is the\n**API prompt our driver submits**, exported to frontend format through ComfyUI's own\n`app.loadApiJson` \u2192 `graph.serialize()`, then verified by round-tripping back through\n`graphToPrompt()` and diffing against the driver's `--dump-workflow` output:\n**0 input-level differences, node ids preserved.** Nothing here was hand-authored.\n\n### Non-default parameters, and the measurement behind each\n\n| setting | value | why it is not the default |\n|---|---|---|\n| steps | **8** | the ref2va lane's measured floor on this box; 20 is the text-to-video lane and is a different question |\n| resolution | **1344\u00d7768** | the 1152\u00d7640 quality floor survives on v0.32.0 (19 v 4, p = 0.0026). Do not enlarge the canvas for 2K |\n| scheduler | **simple** | measured \u2014 and it contradicts this model's own official template. See below |\n| precision | **int8 DiT + bf16 encoder** | the bf16 twin fits at 3 references (90.8 GiB, +27 % s/it) and was rejected on a blind listening test, not on cost |\n| reference count | **\u2264 3** | identity gain plateaus at 3. VRAM does not rise monotonically with count \u2014 90.7 / 93.3 / 90.8 GiB at 1 / 2 / 3 |\n| attention | Sage via the **node**, never the launch flag | the global `--use-sage-attention` flag swaps module-level attention for everything, and the audio VAE calls it |\n\n### The rule that is not visible in the graph\n\n**References must follow who is in shot.** A bound character reference puts that character\nin frame even when the prompt never mentions them \u2014 measured on 2 of 2 shots, and in one\ncase the character rendered *back-to-camera and faceless*, which a face detector scores as\nabsent. Deleting the description is **not** sufficient; drop the `ref_image`.\nA set reference must contain **no one**, and a full-frame plate pins the camera.\n\n### \u26a0\ufe0f The official template's scheduler advice is wrong for this stack\n\nThe official MiniMax H3 R2V template carries embedded guidance saying *\"`beta` or `normal`\nscheduler tends to outperform `simple` for reference-heavy prompts like this one.\"*\n**We tested both, same seed / prompt / references / canvas / steps, scheduler the only variable:**\n\n| scheduler | identity (cosine) | face height | picture |\n|---|---:|---:|---|\n| **simple** (used here) | **0.531** | 39.6 % | clean |\n| `normal` | **0.208** | 38.3 % | clean, slightly better water texture |\n| `beta` | \u2014 | \u2014 | **red grid artefacts over every frame, washed-out colour** |\n\n`beta` produces gross visible corruption \u2014 not a taste judgement. `normal` renders cleanly and\n**destroys identity transfer**; framing is matched to within 1.3 pp, which accounts for only ~0.035\nof the 0.32 gap, so this is an identity result and not a framing artefact.\n\u26a0\ufe0f One seed, so quoted as a direction rather than a closed number \u2014 but both effects sit far\noutside run-to-run noise (identity noise floor here is ~0.0004).\n\n**Why this is worth publishing:** a careful implementer who follows the official note would switch\nto `beta` and silently degrade every render."
+   ],
+   "widgets_values_named": {
+    "text": "## Before the Word \u2014 reference-to-video with native audio\n\nThis is the exact graph every shot in this entry was rendered with. It is the\n**API prompt our driver submits**, exported to frontend format through ComfyUI's own\n`app.loadApiJson` \u2192 `graph.serialize()`, then verified by round-tripping back through\n`graphToPrompt()` and diffing against the driver's `--dump-workflow` output:\n**0 input-level differences, node ids preserved.** Nothing here was hand-authored.\n\n### Non-default parameters, and the measurement behind each\n\n| setting | value | why it is not the default |\n|---|---|---|\n| steps | **8** | the ref2va lane's measured floor on this box; 20 is the text-to-video lane and is a different question |\n| resolution | **1344\u00d7768** | the 1152\u00d7640 quality floor survives on v0.32.0 (19 v 4, p = 0.0026). Do not enlarge the canvas for 2K |\n| scheduler | **simple** | measured \u2014 and it contradicts this model's own official template. See below |\n| precision | **int8 DiT + bf16 encoder** | the bf16 twin fits at 3 references (90.8 GiB, +27 % s/it) and was rejected on a blind listening test, not on cost |\n| reference count | **\u2264 3** | identity gain plateaus at 3. VRAM does not rise monotonically with count \u2014 90.7 / 93.3 / 90.8 GiB at 1 / 2 / 3 |\n| attention | Sage via the **node**, never the launch flag | the global `--use-sage-attention` flag swaps module-level attention for everything, and the audio VAE calls it |\n\n### The rule that is not visible in the graph\n\n**References must follow who is in shot.** A bound character reference puts that character\nin frame even when the prompt never mentions them \u2014 measured on 2 of 2 shots, and in one\ncase the character rendered *back-to-camera and faceless*, which a face detector scores as\nabsent. Deleting the description is **not** sufficient; drop the `ref_image`.\nA set reference must contain **no one**, and a full-frame plate pins the camera.\n\n### \u26a0\ufe0f The official template's scheduler advice is wrong for this stack\n\nThe official MiniMax H3 R2V template carries embedded guidance saying *\"`beta` or `normal`\nscheduler tends to outperform `simple` for reference-heavy prompts like this one.\"*\n**We tested both, same seed / prompt / references / canvas / steps, scheduler the only variable:**\n\n| scheduler | identity (cosine) | face height | picture |\n|---|---:|---:|---|\n| **simple** (used here) | **0.531** | 39.6 % | clean |\n| `normal` | **0.208** | 38.3 % | clean, slightly better water texture |\n| `beta` | \u2014 | \u2014 | **red grid artefacts over every frame, washed-out colour** |\n\n`beta` produces gross visible corruption \u2014 not a taste judgement. `normal` renders cleanly and\n**destroys identity transfer**; framing is matched to within 1.3 pp, which accounts for only ~0.035\nof the 0.32 gap, so this is an identity result and not a framing artefact.\n\u26a0\ufe0f One seed, so quoted as a direction rather than a closed number \u2014 but both effects sit far\noutside run-to-run noise (identity noise floor here is ~0.0004).\n\n**Why this is worth publishing:** a careful implementer who follows the official note would switch\nto `beta` and silently degrade every render."
+   },
+   "color": "#222",
+   "bgcolor": "#000"
+  },
+  {
+   "id": 23,
+   "type": "MarkdownNote",
+   "pos": [
+    -1310,
+    130
+   ],
+   "size": [
+    450,
+    760
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "Note: The reference-audio onset burst \u2014 cause, proof, and the fix in this graph",
+   "properties": {},
+   "widgets_values": [
+    "## The reference-audio onset burst \u2014 cause, proof, and the fix in this graph\n\n**H3 copies the opening milliseconds of the reference wav into the render.** This is the\ncommunity's *\"annoying tiny bits of dialogue at the very first second\"*. It is not a sampler\nartefact and it is not random.\n\n**Measured:** the reference opens with a burst at 0.36\u00d7 speech RMS, **15.2\u00d7 above the gap that\nfollows**. **All 24 renders** conditioned on it reproduce the burst (median 15.3\u00d7, 24/24 above\n3\u00d7), and Whisper transcribes it as a **spurious word before the line in 16 of 24**.\n**Causal:** zeroing the first 200 ms of the reference kills it, **3 of 3**.\n\n**The fix is in this graph, not in a preprocessing step**, because a technical judge reads the\n`.json` \u2014 an `ffmpeg` call outside the graph is invisible. Zero the first `round(sr \u00d7 0.2)`\nsamples of the reference waveform, leaving tensor length unchanged so the audio clock cannot shift.\n\n\u26a0\ufe0f **A separator is not a substitute.** Music-bed removal (htdemucs) is a *different* axis, and it\nis not sample-exact: run on an already-onset-zeroed file it **bled ~0.002 back into a window that\nwas exactly 0.000000**. If you clean and trim, trim **after** cleaning, then verify the head is\nstill exactly zero."
+   ],
+   "widgets_values_named": {
+    "text": "## The reference-audio onset burst \u2014 cause, proof, and the fix in this graph\n\n**H3 copies the opening milliseconds of the reference wav into the render.** This is the\ncommunity's *\"annoying tiny bits of dialogue at the very first second\"*. It is not a sampler\nartefact and it is not random.\n\n**Measured:** the reference opens with a burst at 0.36\u00d7 speech RMS, **15.2\u00d7 above the gap that\nfollows**. **All 24 renders** conditioned on it reproduce the burst (median 15.3\u00d7, 24/24 above\n3\u00d7), and Whisper transcribes it as a **spurious word before the line in 16 of 24**.\n**Causal:** zeroing the first 200 ms of the reference kills it, **3 of 3**.\n\n**The fix is in this graph, not in a preprocessing step**, because a technical judge reads the\n`.json` \u2014 an `ffmpeg` call outside the graph is invisible. Zero the first `round(sr \u00d7 0.2)`\nsamples of the reference waveform, leaving tensor length unchanged so the audio clock cannot shift.\n\n\u26a0\ufe0f **A separator is not a substitute.** Music-bed removal (htdemucs) is a *different* axis, and it\nis not sample-exact: run on an already-onset-zeroed file it **bled ~0.002 back into a window that\nwas exactly 0.000000**. If you clean and trim, trim **after** cleaning, then verify the head is\nstill exactly zero."
+   },
+   "color": "#222",
+   "bgcolor": "#000"
+  },
+  {
+   "id": 24,
+   "type": "MarkdownNote",
+   "pos": [
+    -840,
+    130
+   ],
+   "size": [
+    450,
+    760
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "Note: \u26a0\ufe0f Native references + keyframes are silently incompatible in every released ComfyUI",
+   "properties": {},
+   "widgets_values": [
+    "## \u26a0\ufe0f Native references + keyframes are silently incompatible in every released ComfyUI\n\nIf you bind native reference images **and** keyframes on the same generation, **the keyframes are\ndropped \u2014 not rejected.** No error, no warning; you simply get a render that ignored them.\n\n`comfy/model_base.py` writes `cond_video_latents` and then **overwrites it a few lines later**.\nVerified present in **v0.32.0 and in v0.33.3, the newest release at time of writing.**\n\n**The fix exists and is not ours:** PR #15439 changes the overwrite to an append. Credit to\n**drozbay**. It is merged to `master` and is **in no release**, so upgrading does not get it \u2014\npatch the file or run a worktree.\n\nOur contribution is the **failure mode and its silence**: this is exactly the combination a\nreference-heavy workflow pushes you toward, and nothing in the UI tells you it happened."
+   ],
+   "widgets_values_named": {
+    "text": "## \u26a0\ufe0f Native references + keyframes are silently incompatible in every released ComfyUI\n\nIf you bind native reference images **and** keyframes on the same generation, **the keyframes are\ndropped \u2014 not rejected.** No error, no warning; you simply get a render that ignored them.\n\n`comfy/model_base.py` writes `cond_video_latents` and then **overwrites it a few lines later**.\nVerified present in **v0.32.0 and in v0.33.3, the newest release at time of writing.**\n\n**The fix exists and is not ours:** PR #15439 changes the overwrite to an append. Credit to\n**drozbay**. It is merged to `master` and is **in no release**, so upgrading does not get it \u2014\npatch the file or run a worktree.\n\nOur contribution is the **failure mode and its silence**: this is exactly the combination a\nreference-heavy workflow pushes you toward, and nothing in the UI tells you it happened."
+   },
+   "color": "#222",
+   "bgcolor": "#000"
+  },
+  {
+   "id": 25,
+   "type": "MarkdownNote",
+   "pos": [
+    -370,
+    130
+   ],
+   "size": [
+    450,
+    760
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "title": "Note: How shots were accepted \u2014 pre-registered gates, not \"re-roll until it looks right\"",
+   "properties": {},
+   "widgets_values": [
+    "## How shots were accepted \u2014 pre-registered gates, not \"re-roll until it looks right\"\n\nEvery shipped shot carries the measurement that admitted it. Thresholds were fixed on a pilot\n**before** the shots they judge, and the number is logged whether the shot passed or failed.\n\n**Four instruments can gate a single shot**, and the honest list is short on purpose:\n\n| instrument | what it decides |\n|---|---|\n| dialogue adherence (ASR) | did this character speak their named line \u2014 binary, absolute |\n| lip-sync | a **floor** check: does the mouth move *because of* the speech. It cannot certify content |\n| face identity + face height | identity, but only quoted alongside framing \u2014 the embedding does not survive a framing change |\n| audio envelope vs the reference | the only valid \"did the audio survive?\" test |\n\n**Instruments deliberately NOT used as gates**, each for a measured reason: an audio accept-screen\nwhose absolute threshold **does not transfer between render families** (16 dB apart) and which is\ntherefore a ranking, not a verdict; a tail-transient measure that is descriptive by construction;\na feature counter that emits raw calls and needs an association test; and a face **counter** that\ncannot see a body turned away from camera.\n\n\ud83d\udd34 **Identity and staging are never collapsed into one score.** A weighted aggregate hides exactly\nthe failure being demonstrated \u2014 either one can reject a shot on its own."
+   ],
+   "widgets_values_named": {
+    "text": "## How shots were accepted \u2014 pre-registered gates, not \"re-roll until it looks right\"\n\nEvery shipped shot carries the measurement that admitted it. Thresholds were fixed on a pilot\n**before** the shots they judge, and the number is logged whether the shot passed or failed.\n\n**Four instruments can gate a single shot**, and the honest list is short on purpose:\n\n| instrument | what it decides |\n|---|---|\n| dialogue adherence (ASR) | did this character speak their named line \u2014 binary, absolute |\n| lip-sync | a **floor** check: does the mouth move *because of* the speech. It cannot certify content |\n| face identity + face height | identity, but only quoted alongside framing \u2014 the embedding does not survive a framing change |\n| audio envelope vs the reference | the only valid \"did the audio survive?\" test |\n\n**Instruments deliberately NOT used as gates**, each for a measured reason: an audio accept-screen\nwhose absolute threshold **does not transfer between render families** (16 dB apart) and which is\ntherefore a ranking, not a verdict; a tail-transient measure that is descriptive by construction;\na feature counter that emits raw calls and needs an association test; and a face **counter** that\ncannot see a body turned away from camera.\n\n\ud83d\udd34 **Identity and staging are never collapsed into one score.** A weighted aggregate hides exactly\nthe failure being demonstrated \u2014 either one can reject a shot on its own."
+   },
+   "color": "#222",
+   "bgcolor": "#000"
+  }
+ ],
+ "links": [
+  [
+   22,
+   2,
+   0,
+   5,
+   0,
+   "CLIP"
+  ],
+  [
+   23,
+   3,
+   0,
+   5,
+   1,
+   "VAE"
+  ],
+  [
+   24,
+   4,
+   0,
+   5,
+   2,
+   "VAE"
+  ],
+  [
+   25,
+   20,
+   0,
+   5,
+   3,
+   "IMAGE"
+  ],
+  [
+   26,
+   21,
+   0,
+   5,
+   7,
+   "AUDIO"
+  ],
+  [
+   27,
+   16,
+   0,
+   6,
+   0,
+   "MODEL"
+  ],
+  [
+   28,
+   16,
+   0,
+   8,
+   0,
+   "MODEL"
+  ],
+  [
+   29,
+   5,
+   0,
+   8,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   30,
+   9,
+   0,
+   10,
+   0,
+   "NOISE"
+  ],
+  [
+   31,
+   8,
+   0,
+   10,
+   1,
+   "GUIDER"
+  ],
+  [
+   32,
+   7,
+   0,
+   10,
+   2,
+   "SAMPLER"
+  ],
+  [
+   33,
+   6,
+   0,
+   10,
+   3,
+   "SIGMAS"
+  ],
+  [
+   34,
+   5,
+   1,
+   10,
+   4,
+   "LATENT"
+  ],
+  [
+   35,
+   10,
+   0,
+   11,
+   0,
+   "LATENT"
+  ],
+  [
+   36,
+   3,
+   0,
+   11,
+   1,
+   "VAE"
+  ],
+  [
+   37,
+   10,
+   0,
+   12,
+   0,
+   "LATENT"
+  ],
+  [
+   38,
+   4,
+   0,
+   12,
+   1,
+   "VAE"
+  ],
+  [
+   39,
+   11,
+   0,
+   13,
+   0,
+   "IMAGE"
+  ],
+  [
+   40,
+   12,
+   0,
+   13,
+   1,
+   "AUDIO"
+  ],
+  [
+   41,
+   13,
+   0,
+   14,
+   0,
+   "VIDEO"
+  ],
+  [
+   42,
+   1,
+   0,
+   16,
+   0,
+   "MODEL"
+  ]
+ ],
+ "floatingLinks": null,
+ "groups": [],
+ "definitions": null,
+ "config": {},
+ "extra": {
+  "ds": {
+   "scale": 0.9,
+   "offset": [
+    416,
+    110
+   ]
+  },
+  "reroutes": null
+ },
+ "version": 0.4
+}

@@ -1,0 +1,11 @@
+[project]
+name = "comfyui-h3-onset-guard"
+description = "Zero the leading N ms of an H3 reference voice — H3 copies that window into the render as a phantom onset."
+version = "1.0.0"
+license = { text = "MIT" }
+dependencies = []
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "H3 Onset Guard"
+Repository = "https://github.com/bill-h-lin/comfyui-h3-onset"
