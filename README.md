@@ -71,19 +71,21 @@ UI rather than asking you to trust it.
 
 ## Two more things worth knowing, found while building this
 
-### 1. Native references + keyframes are silently incompatible in every released ComfyUI
+### 1. Native references + keyframes are silently incompatible in ComfyUI up to and including v0.33.3
 
 Bind native reference images **and** keyframes on the same generation and **the keyframes are
 dropped — not rejected.** No error, no warning; you get a render that ignored them and you assume
 the model is weak at control.
 
-`comfy/model_base.py` writes `cond_video_latents` and then **overwrites it a few lines later.**
-Verified present in **v0.32.0** and in **v0.33.3**, the newest release at the time of writing.
+In `comfy/model_base.py`, `class MiniMaxH3`'s `extra_conds` has **two independent `if` blocks, not
+an `if`/`else`**: the keyframe branch assigns `cond_video_latents`, and the reference branch then
+**unconditionally reassigns it.** Verified present on **v0.32.0** and **v0.33.3**.
 
-**The fix exists and is not mine:** PR **#15439** changes the overwrite to an append — credit to
-**drozbay**. It is merged to `master` and is **in no release**, so upgrading does not get it. Patch
-the file or run a worktree. The contribution here is the *failure mode and its silence*: this is
-exactly the combination a reference-heavy workflow pushes you toward.
+**The fix exists, it is not mine, and it has shipped:** PR **#15439** changes the overwrite to an
+append — credit to **drozbay**. Merged 2026-08-13 and **released in ComfyUI v0.34.0 on 2026-08-26.**
+⇒ **On v0.34.0 or newer you do not have this bug; on v0.33.3 or older you still do**, and nothing in
+the UI will tell you. The contribution here is the *failure mode and its silence*: this is exactly
+the combination a reference-heavy workflow pushes you toward.
 
 ### 2. The official H3 template's scheduler advice degrades this stack
 
