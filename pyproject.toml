@@ -1,11 +1,15 @@
 [project]
-name = "comfyui-h3-onset-guard"
-description = "Zero the leading N ms of an H3 reference voice — H3 copies that window into the render as a phantom onset."
-version = "1.0.0"
+name = "comfyui-h3-onset"
+description = "Two nodes for MiniMax H3 audio: remove the phantom onset it copies from your reference, and command WHEN it makes a sound."
+version = "2.0.0"
 license = { text = "MIT" }
 dependencies = []
+requires-python = ">=3.10"
+
+[project.urls]
+Repository = "https://github.com/bill-h-lin/comfyui-h3-onset"
 
 [tool.comfy]
-PublisherId = ""
-DisplayName = "H3 Onset Guard"
+PublisherId = "bill-h-lin"
+DisplayName = "H3 Onset"
 Repository = "https://github.com/bill-h-lin/comfyui-h3-onset"

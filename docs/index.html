@@ -1,0 +1,91 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE FUSE — MiniMax H3 sync-sound short</title>
+<meta property="og:title" content="THE FUSE">
+<meta property="og:description" content="A sync-sound short generated with MiniMax H3 in ComfyUI. The rhythm was written into a carrier wav before the pictures existed, and every commanded beat came back on time.">
+<meta property="og:type" content="video.other">
+<style>
+  :root{--bg:#0f1115;--fg:#e8e6e3;--dim:#9aa0a6;--line:#272b33;--accent:#7aa2f7}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:15px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1100px;margin:0 auto;padding:40px 20px 72px}
+  h1{font-size:30px;letter-spacing:.14em;margin:0 0 4px;font-weight:600}
+  .sub{color:var(--dim);margin:0 0 26px;font-size:14px}
+  video{width:100%;height:auto;display:block;background:#000;border-radius:8px;border:1px solid var(--line)}
+  .row{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 30px}
+  a.btn{display:inline-block;padding:9px 15px;border:1px solid var(--line);border-radius:7px;
+        color:var(--fg);text-decoration:none;font-size:14px;background:#161a21}
+  a.btn:hover{border-color:var(--accent);color:var(--accent)}
+  h2{font-size:15px;margin:30px 0 10px;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);font-weight:600}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  td,th{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  th{color:var(--dim);font-weight:600}
+  code{background:#161a21;padding:1px 5px;border-radius:4px;font-size:13px}
+  .note{color:var(--dim);font-size:13px;margin-top:26px;border-top:1px solid var(--line);padding-top:16px}
+  a{color:var(--accent)}
+</style>
+<div class="wrap">
+  <h1>THE FUSE</h1>
+  <p class="sub">34.3 seconds &middot; MiniMax H3 reference-to-video &middot; picture and audio generated in the same pass &middot; ComfyUI v0.32.0, local</p>
+
+  <video controls preload="metadata" playsinline poster="poster.jpg">
+    <source src="THE_FUSE.mp4" type="video/mp4">
+    Your browser cannot play this file.
+    <a href="THE_FUSE.mp4">Download the MP4</a> instead.
+  </video>
+
+  <div class="row">
+    <a class="btn" href="THE_FUSE.mp4" download>&#11015; Download MP4</a>
+    <a class="btn" href="h3_fuse_workflow.json">&#123;&#125; The workflow .json</a>
+    <a class="btn" href="carriers/">The carrier wavs + build script</a>
+    <a class="btn" href="https://github.com/bill-h-lin/comfyui-h3-onset">The custom node repo</a>
+  </div>
+
+  <h2>What this is</h2>
+  <p>One impact travelling through a chain of materials. <strong>I wrote the sound before the pictures existed, and every beat I placed came back
+  where I put it.</strong> H3 gives you no handle on <em>when</em> it makes a
+  sound &mdash; but a transient written into the bound reference comes back in the render at the time you
+  put it. So the rhythm is authored first and the model performs it.</p>
+  <p><strong>What I am not claiming:</strong> not every sound here was written. On the glass, ceramic
+  and melon shots the loudest thing in the shot is <em>the model's own</em> &mdash; a depicted break
+  makes H3 generate an event at the head of the render, unbidden, scaling with how violent the picture
+  line is. Those are real, synced and free, but I did not command them. The beats I <em>did</em>
+  command are a separate, measured set.</p>
+  <p>Picture and audio come from the same H3 pass in every shot. Nothing was overlaid, recorded, or
+  attached afterwards; the joins carry room tone from the two shots being spliced.</p>
+
+  <h2>The one thing worth stealing</h2>
+  <p>Seven transients placed at 1000/1900/2548/3015/3350/3592/3766&nbsp;ms came back at
+  <code>+27.0 &hellip; +12.2&nbsp;dB</code> over an otherwise byte-identical carrier, 3 of 3 seeds on every
+  one; seven <em>decoy</em> times with nothing placed read <code>&minus;0.3 &hellip; +1.4&nbsp;dB</code>,
+  also 3/3. Gaps down to <strong>174&nbsp;ms</strong> still resolve &mdash; but the real limit is <strong>position, not gap</strong>: in a 124-frame render everything commanded at or before <strong>~3.02&nbsp;s</strong> reproduces and everything at or after <strong>~3.35&nbsp;s</strong> does not, deterministic across 3 seeds &times; 2 subjects. A 243&nbsp;ms gap fires at 3.00&nbsp;s and a 242&nbsp;ms gap fails at 3.59&nbsp;s. <strong>Put your beats in the first three seconds.</strong> Several deltas <em>exceed</em> the cue's
+  own amplitude &mdash; the model generates a fuller event than you wrote in, so the reference only says
+  <em>when</em>.</p>
+  <p><strong>What it does not do:</strong> it does not command the picture. A pre-registered test of
+  picture-follows-sound <em>failed</em> here. Visible agreement is something you <em>select</em> for
+  across takes and then land with the cut. (The ~57% selection rate I measured is from an earlier subject class, not this film &mdash; I have not re-measured it here, so treat it as an order of magnitude, not a number for these shots.) I'd rather say that than
+  imply the model choreographed the image.</p>
+
+  <h2>The graph</h2>
+  <table>
+    <tr><th>setting</th><th>value</th><th>why not the default</th></tr>
+    <tr><td>steps</td><td><code>8</code></td><td>the ref2va lane's measured production point on this box</td></tr>
+    <tr><td>resolution</td><td><code>1344&times;768</code></td><td>the 1152&times;640 detail floor survives v0.32.0 (19 v 4, p = 0.0026)</td></tr>
+    <tr><td>scheduler</td><td><code>simple</code></td><td>measured &mdash; and it contradicts this model's own official template</td></tr>
+    <tr><td>sampler</td><td><code>res_multistep</code></td><td></td></tr>
+    <tr><td>references</td><td>1 audio, no image</td><td>the carrier is the whole control surface here; a bound plate over-pins the camera</td></tr>
+    <tr><td><code>H3ZeroAudioPrefix</code></td><td>200&nbsp;ms + 10&nbsp;ms ramp</td><td>kills the spurious blurt in the first second &mdash; cause measured, fix shipped as a node</td></tr>
+    <tr><td><code>LoadAudio</code> &rarr; <code>H3ZeroAudioPrefix</code></td><td>the bound reference</td><td>the carrier wav is built <em>offline</em> by <code>build_score.py</code> (shipped in <code>carriers/</code>) and loaded &mdash; so the beats you hear were written before the render, not during it</td></tr>
+  </table>
+  <p class="note" style="margin-top:14px;border:0;padding-top:0">
+  Two honest notes on the <code>.json</code>. <strong>(1)</strong> It is <em>one shot's</em> API graph &mdash;
+  all nine shots run the identical graph and differ only in prompt, seed and carrier wav, so this is the
+  build, not a sample of it. <strong>(2)</strong> <code>H3PlaceTransient</code> ships in the node repo and
+  does the beat-writing <em>inside</em> ComfyUI, but it is <strong>not in this graph</strong>: this film's
+  carriers were built offline with <code>build_score.py</code> before rendering. I would rather you find
+  that here than in the JSON.</p>
+
+  <p class="note"><strong>AI generation disclosure.</strong> Every shot in this film &mdash; picture and audio together &mdash; was generated by MiniMax H3 (reference-to-video) in ComfyUI v0.32.0, running locally on one RTX PRO 6000. No sound was recorded, licensed or overlaid; the audio in each shot came out of the same H3 pass as its picture. Editing was limited to cutting, level ramps at head and tail, and 120&nbsp;ms of room tone taken from the two shots being joined. No people appear in the film.</p>
+</div>
