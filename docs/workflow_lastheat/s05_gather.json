@@ -1,0 +1,198 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_32b_minimax_h3_bf16.safetensors",
+   "type": "minimax",
+   "device": "default"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+  }
+ },
+ "5": {
+  "class_type": "MiniMaxH3ReferenceToVideo",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ],
+   "audio_vae": [
+    "4",
+    0
+   ],
+   "prompt": "integrated_multimodal_description: <Audio 1> is the exact voice of the old glassmaker, a man in his seventies who has run this furnace for forty years. [Shot 1] Live-action, cinematic, photoreal. A steel blowpipe draws a glowing ball of molten glass out through the mouth of a furnace into a black room. The glass is white-hot at its centre and deep orange at its edges, and it runs and folds slowly under its own weight as it comes clear of the opening. The only light in the frame comes from the glass and the furnace behind it. Extreme thermal contrast. The camera is locked off and static in one position and does not move at any point. Every surface in frame is plain and unmarked: bare fire brick, black steel, dark worn cloth and clear glass. From beyond the frame, the old man's voice says, in the voice timbre referenced from <Audio 1>: \"[English] The glass doesn't wait for ready.\"\n\noverall_soundscape: A roaring furnace and the heavy drag of a steel pipe on a metal sill. An old man speaks over it. No music.\n\nnon_diegetic_music: N/A",
+   "width": 1344,
+   "height": 768,
+   "length": 124,
+   "ref_image_size": "match",
+   "ref_audios.ref_audio_0": [
+    "700",
+    0
+   ]
+  }
+ },
+ "6": {
+  "class_type": "BasicScheduler",
+  "inputs": {
+   "model": [
+    "16",
+    0
+   ],
+   "scheduler": "simple",
+   "steps": 8,
+   "denoise": 1.0
+  }
+ },
+ "7": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "res_multistep"
+  }
+ },
+ "8": {
+  "class_type": "BasicGuider",
+  "inputs": {
+   "model": [
+    "16",
+    0
+   ],
+   "conditioning": [
+    "5",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 20265913
+  }
+ },
+ "10": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "9",
+    0
+   ],
+   "guider": [
+    "8",
+    0
+   ],
+   "sampler": [
+    "7",
+    0
+   ],
+   "sigmas": [
+    "6",
+    0
+   ],
+   "latent_image": [
+    "5",
+    1
+   ]
+  }
+ },
+ "11": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "10",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "12": {
+  "class_type": "VAEDecodeAudio",
+  "inputs": {
+   "samples": [
+    "10",
+    0
+   ],
+   "vae": [
+    "4",
+    0
+   ]
+  }
+ },
+ "13": {
+  "class_type": "CreateVideo",
+  "inputs": {
+   "images": [
+    "11",
+    0
+   ],
+   "audio": [
+    "12",
+    0
+   ],
+   "fps": 24.0,
+   "bit_depth": 8
+  }
+ },
+ "14": {
+  "class_type": "SaveVideo",
+  "inputs": {
+   "video": [
+    "13",
+    0
+   ],
+   "filename_prefix": "video/h3_c21mcp_s05_gather_s20265913",
+   "format": "auto",
+   "codec": "auto"
+  }
+ },
+ "21": {
+  "class_type": "LoadAudio",
+  "inputs": {
+   "audio": "c5_calm_voice.wav"
+  }
+ },
+ "700": {
+  "class_type": "H3ZeroAudioPrefix",
+  "inputs": {
+   "audio": [
+    "21",
+    0
+   ],
+   "ms": 200.0,
+   "ramp_ms": 10.0
+  }
+ },
+ "16": {
+  "class_type": "PathchSageAttentionKJ",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "sage_attention": "auto",
+   "allow_compile": false
+  }
+ }
+}

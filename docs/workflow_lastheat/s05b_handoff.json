@@ -1,0 +1,197 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_32b_minimax_h3_bf16.safetensors",
+   "type": "minimax",
+   "device": "default"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+  }
+ },
+ "5": {
+  "class_type": "MiniMaxH3ReferenceToVideo",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ],
+   "audio_vae": [
+    "4",
+    0
+   ],
+   "prompt": "integrated_multimodal_description: <Subject 1> is the old glassmaker with the grey hair and short grey beard in <Picture 1>. <Subject 2> is the young woman with her hair tied back in <Picture 2>. [Shot 1] Live-action, cinematic, photoreal. A wide shot of a workbench in a dark glass workshop, lit from the left by the open mouth of a furnace. <Subject 1> stands at the bench holding a long steel blowpipe with a glowing ball of molten glass on the end of it, and <Subject 2> stands behind him in the shadow. <Subject 1> straightens up, lets go of the pipe and steps back out of the light, and <Subject 2> moves forward into his place at the bench and takes hold of the pipe. Deep black shadows, one hot orange source from the left, extreme contrast. The camera is locked off and static in one position and does not move at any point. Every surface in frame is plain and unmarked: bare fire brick, black steel, dark worn cloth and clear glass.\n\noverall_soundscape: A low roaring furnace filling a large brick room, two sets of boots moving on a stone floor, and the scrape of a steel pipe changing hands. No music, no voices, no speech.\n\nnon_diegetic_music: N/A",
+   "width": 1344,
+   "height": 768,
+   "length": 124,
+   "ref_image_size": "match",
+   "ref_images.ref_image_0": [
+    "20",
+    0
+   ],
+   "ref_images.ref_image_1": [
+    "201",
+    0
+   ]
+  }
+ },
+ "6": {
+  "class_type": "BasicScheduler",
+  "inputs": {
+   "model": [
+    "16",
+    0
+   ],
+   "scheduler": "simple",
+   "steps": 8,
+   "denoise": 1.0
+  }
+ },
+ "7": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "res_multistep"
+  }
+ },
+ "8": {
+  "class_type": "BasicGuider",
+  "inputs": {
+   "model": [
+    "16",
+    0
+   ],
+   "conditioning": [
+    "5",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 20265911
+  }
+ },
+ "10": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "9",
+    0
+   ],
+   "guider": [
+    "8",
+    0
+   ],
+   "sampler": [
+    "7",
+    0
+   ],
+   "sigmas": [
+    "6",
+    0
+   ],
+   "latent_image": [
+    "5",
+    1
+   ]
+  }
+ },
+ "11": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "10",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "12": {
+  "class_type": "VAEDecodeAudio",
+  "inputs": {
+   "samples": [
+    "10",
+    0
+   ],
+   "vae": [
+    "4",
+    0
+   ]
+  }
+ },
+ "13": {
+  "class_type": "CreateVideo",
+  "inputs": {
+   "images": [
+    "11",
+    0
+   ],
+   "audio": [
+    "12",
+    0
+   ],
+   "fps": 24.0,
+   "bit_depth": 8
+  }
+ },
+ "14": {
+  "class_type": "SaveVideo",
+  "inputs": {
+   "video": [
+    "13",
+    0
+   ],
+   "filename_prefix": "video/h3_c21mcp_s05b_handoff_s20265911",
+   "format": "auto",
+   "codec": "auto"
+  }
+ },
+ "20": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "lh_master_crop.png"
+  }
+ },
+ "201": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "lh_appr_full_crop.png"
+  }
+ },
+ "16": {
+  "class_type": "PathchSageAttentionKJ",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "sage_attention": "auto",
+   "allow_compile": false
+  }
+ }
+}

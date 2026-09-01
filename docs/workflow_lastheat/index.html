@@ -1,0 +1,109 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE LAST HEAT — the 18 workflow graphs</title>
+<style>
+  :root{--bg:#0f1115;--fg:#e8e6e3;--dim:#9aa0a6;--line:#272b33;--accent:#7aa2f7}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:15px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1100px;margin:0 auto;padding:40px 20px 72px}
+  h1{font-size:26px;letter-spacing:.10em;margin:0 0 4px;font-weight:600}
+  .sub{color:var(--dim);margin:0 0 26px;font-size:14px}
+  h2{font-size:15px;margin:30px 0 10px;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);font-weight:600}
+  a{color:var(--accent)}
+  a.btn{display:inline-block;padding:9px 15px;border:1px solid var(--line);border-radius:7px;
+        color:var(--fg);text-decoration:none;font-size:14px;background:#161a21;margin:0 10px 10px 0}
+  a.btn:hover{border-color:var(--accent);color:var(--accent)}
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  td,th{border-bottom:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+  th{color:var(--dim);font-weight:600}
+  code{background:#161a21;padding:1px 5px;border-radius:4px;font-size:12.5px}
+  .note{color:var(--dim);font-size:13px;margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+  .scroll{overflow-x:auto}
+</style>
+<div class="wrap">
+  <h1>THE LAST HEAT &mdash; the 18 graphs</h1>
+  <p class="sub">One executed API graph per shot &middot; not a sample, not a canvas export &middot;
+  <a href="../">&larr; back to the film</a></p>
+
+  <p><a class="btn" href="h3_lastheat_workflows.zip">&#11015; All 18 graphs (.zip)</a>
+     <a class="btn" href="README.md">&#8505; The annotation</a>
+     <a class="btn" href="https://github.com/bill-h-lin/comfyui-h3-onset">The custom node repo</a></p>
+
+  <h2>The graphs are not identical to one another</h2>
+  <p>A single &ldquo;here is the workflow&rdquo; file would be a false statement about this film. The shots
+  differ in <strong>which references they bind</strong>, and that changes the node count (15&ndash;19).</p>
+  <table>
+    <tr><th>&nbsp;</th><th>shots</th></tr>
+    <tr><td>bind <strong>at least one reference image</strong></td><td><strong>11 of 18</strong></td></tr>
+    <tr><td>bind <strong>a reference voice</strong></td><td><strong>10 of 18</strong></td></tr>
+    <tr><td>bind <strong>both</strong></td><td><strong>7 of 18</strong></td></tr>
+    <tr><td>bind <strong>neither</strong> &mdash; text &rarr; picture + audio in one pass</td><td><strong>4 of 18</strong></td></tr>
+    <tr><td>bind <strong>two</strong> reference images, addressed as <code>&lt;Picture 1&gt;</code> / <code>&lt;Picture 2&gt;</code></td><td><strong>4 of 18</strong></td></tr>
+    <tr><td>carry a spoken line (<code>[English]</code> in the prompt)</td><td><strong>10 of 18</strong></td></tr>
+    <tr><td>route the voice through <strong><code>H3ZeroAudioPrefix</code></strong> (this repo's node)</td><td><strong>10 of 18</strong></td></tr>
+  </table>
+  <p class="note" style="border:0;padding-top:8px">⭐ <strong>The two-reference shots are the interesting
+  ones.</strong> <code>MiniMaxH3ReferenceToVideo</code> takes a <em>list</em> of reference images
+  (<code>ref_images.ref_image_0</code>, <code>ref_image_1</code>) and the prompt addresses them
+  positionally as <code>&lt;Picture 1&gt;</code> / <code>&lt;Picture 2&gt;</code>. That is how both
+  characters hold their identity in the same frame.<br>
+  ⭐ <strong><code>H3ZeroAudioPrefix</code> sits in 10 of these graphs</strong>, between
+  <code>LoadAudio</code> and the H3 node &mdash; the node in this repo doing the job it was written for.</p>
+
+  <h2>Constant across all 18 shots</h2>
+  <p><code>width</code> 1344 &middot; <code>height</code> 768 &middot; <code>length</code> 124 f @ 24 fps
+  &middot; <code>steps</code> 8 &middot; <code>scheduler</code> <code>simple</code> &middot;
+  <code>sampler_name</code> <code>res_multistep</code> &middot; UNet
+  <code>minimax_h3_ref2va_pruned_int8_convrot</code> &middot; CLIP
+  <code>qwen3vl_32b_minimax_h3_bf16</code> (<code>type: minimax</code>) &middot; video VAE fp16 + audio
+  VAE fp32 &middot; <code>PathchSageAttentionKJ</code> &middot; <code>VAEDecode</code> <strong>and</strong>
+  <code>VAEDecodeAudio</code> off the same sampler output.
+  <em>(Asserted programmatically over all 18 files, not read off by eye.)</em></p>
+
+  <h2>Per shot, in cut order</h2>
+  <div class="scroll"><table>
+    <tr><th>#</th><th>graph</th><th>frames</th><th>cut dur (s)</th><th>nodes</th><th>seed</th><th>ref images</th>
+        <th>ref voice</th><th>line</th><th>ZeroAudioPrefix</th></tr>
+    <tr><td>1</td><td><a href="s01_shopwide.json">s01_shopwide.json</a></td><td>124</td><td>5.17</td><td>17</td><td><code>20265911</code></td><td>&mdash;</td><td><code>c5_calm_voice.wav</code></td><td>yes</td><td>yes</td></tr>
+    <tr><td>2</td><td><a href="s03c_master_look.json">s03c_master_look.json</a></td><td>121</td><td>5.04</td><td>18</td><td><code>20265953</code></td><td><code>lh_master_crop.png</code></td><td><code>c5_calm_voice.wav</code></td><td>yes</td><td>yes</td></tr>
+    <tr><td>3</td><td><a href="s04_appr_a.json">s04_appr_a.json</a></td><td>119</td><td>4.96</td><td>18</td><td><code>20265911</code></td><td><code>lh_appr_full_crop.png</code></td><td><code>c5_noa_voice.wav</code></td><td>yes</td><td>yes</td></tr>
+    <tr><td>4</td><td><a href="s05_gather.json">s05_gather.json</a></td><td>121</td><td>5.04</td><td>17</td><td><code>20265913</code></td><td>&mdash;</td><td><code>c5_calm_voice.wav</code></td><td>yes</td><td>yes</td></tr>
+    <tr><td>5</td><td><a href="s05b_handoff.json">s05b_handoff.json</a></td><td>96</td><td>4.00</td><td>17</td><td><code>20265911</code></td><td><code>lh_master_crop.png</code>, <code>lh_appr_full_crop.png</code></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td>6</td><td><a href="s07_breath.json">s07_breath.json</a></td><td>84</td><td>3.50</td><td>15</td><td><code>20265911</code></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td>7</td><td><a href="s09_master_b.json">s09_master_b.json</a></td><td>118</td><td>4.92</td><td>18</td><td><code>20265911</code></td><td><code>lh_master_crop.png</code></td><td><code>c5_calm_voice.wav</code></td><td>yes</td><td>yes</td></tr>
+    <tr><td>8</td><td><a href="s09b_eyeline.json">s09b_eyeline.json</a></td><td>101</td><td>4.21</td><td>17</td><td><code>20265931</code></td><td><code>lh_master_crop.png</code>, <code>lh_appr_full_crop.png</code></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td>9</td><td><a href="s10b_steady.json">s10b_steady.json</a></td><td>124</td><td>5.17</td><td>17</td><td><code>20265943</code></td><td><code>lh_master_crop.png</code>, <code>lh_appr_full_crop.png</code></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td>10</td><td><a href="s11_thin.json">s11_thin.json</a></td><td>122</td><td>5.08</td><td>17</td><td><code>20265913</code></td><td>&mdash;</td><td><code>c5_calm_voice.wav</code></td><td>yes</td><td>yes</td></tr>
+    <tr><td>11</td><td><a href="s12_appr_b.json">s12_appr_b.json</a></td><td>101</td><td>4.21</td><td>18</td><td><code>20265912</code></td><td><code>lh_appr_full_crop.png</code></td><td><code>c5_noa_voice.wav</code></td><td>yes</td><td>yes</td></tr>
+    <tr><td>12</td><td><a href="s13c_reflect.json">s13c_reflect.json</a></td><td>124</td><td>5.17</td><td>15</td><td><code>20265961</code></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td>13</td><td><a href="s13b_hesays.json">s13b_hesays.json</a></td><td>121</td><td>5.04</td><td>18</td><td><code>20265913</code></td><td><code>lh_master_crop.png</code></td><td><code>c5_calm_voice.wav</code></td><td>yes</td><td>yes</td></tr>
+    <tr><td>14</td><td><a href="s14_appr_c.json">s14_appr_c.json</a></td><td>124</td><td>5.17</td><td>18</td><td><code>20265911</code></td><td><code>lh_appr_full_crop.png</code></td><td><code>c5_noa_voice.wav</code></td><td>yes</td><td>yes</td></tr>
+    <tr><td>15</td><td><a href="s15c_ring.json">s15c_ring.json</a></td><td>124</td><td>5.17</td><td>15</td><td><code>20265922</code></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td>16</td><td><a href="s16_place.json">s16_place.json</a></td><td>84</td><td>3.50</td><td>16</td><td><code>20265941</code></td><td><code>lh_appr_full_crop.png</code></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td>17</td><td><a href="s18b_tight.json">s18b_tight.json</a></td><td>124</td><td>5.17</td><td>19</td><td><code>20265973</code></td><td><code>lh_master_crop.png</code>, <code>lh_appr_full_crop.png</code></td><td><code>c5_calm_voice.wav</code></td><td>yes</td><td>yes</td></tr>
+    <tr><td>18</td><td><a href="s17_dawn.json">s17_dawn.json</a></td><td>124</td><td>5.17</td><td>15</td><td><code>20265942</code></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+  </table></div>
+
+  <h2>What is not here, and why</h2>
+  <p>The bound reference files themselves (<code>lh_master_crop.png</code>,
+  <code>lh_appr_full_crop.png</code>, <code>c5_calm_voice.wav</code>, <code>c5_noa_voice.wav</code>) are
+  <strong>not redistributed</strong>. The two images are crops of frames from <strong>text-only H3
+  renders</strong> made on this box &mdash; no photograph of any real person exists anywhere in the
+  chain. Load a graph, point <code>LoadImage</code>/<code>LoadAudio</code> at your own reference, change
+  the <code>prompt</code>.</p>
+
+  <h2>Dependencies</h2>
+  <table>
+    <tr><td>ComfyUI <strong>v0.32.0</strong> with the MiniMax H3 nodes</td><td><code>MiniMaxH3ReferenceToVideo</code>, <code>VAEDecodeAudio</code></td></tr>
+    <tr><td><strong><code>H3ZeroAudioPrefix</code></strong> &mdash; <a href="https://github.com/bill-h-lin/comfyui-h3-onset">this repo</a></td><td>needed by 10 of 18; the other 8 run without it</td></tr>
+    <tr><td><code>PathchSageAttentionKJ</code> &mdash; ComfyUI-KJNodes</td><td>a speed patch. Drop the node and rewire <code>UNETLoader</code> &rarr; <code>BasicScheduler</code>/<code>BasicGuider</code> if you do not have it</td></tr>
+    <tr><td>models</td><td><code>minimax_h3_ref2va_pruned_int8_convrot</code>, <code>qwen3vl_32b_minimax_h3_bf16</code>, <code>minimax_h3_video_vae_fp16</code>, <code>minimax_h3_audio_vae_fp32</code></td></tr>
+  </table>
+
+  <p class="note"><strong>Format.</strong> These are <strong>API graphs</strong> (the <code>/prompt</code>
+  payload), not canvas exports &mdash; that is what ComfyUI executed and what the <code>/history</code>
+  audit compares against, so it is what is published. An API graph carries no <code>Note</code> nodes,
+  which is why this page is the annotation.</p>
+</div>

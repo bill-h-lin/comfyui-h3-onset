@@ -1,0 +1,177 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_32b_minimax_h3_bf16.safetensors",
+   "type": "minimax",
+   "device": "default"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+  }
+ },
+ "5": {
+  "class_type": "MiniMaxH3ReferenceToVideo",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ],
+   "audio_vae": [
+    "4",
+    0
+   ],
+   "prompt": "integrated_multimodal_description: [Shot 1] Live-action, cinematic, photoreal. A medium shot of a young woman in a dark glass workshop, seen from the side, backlit by the orange furnace behind her so she reads mostly as a dark shape with a hot rim of light along her arm and cheek. She holds the end of a long steel blowpipe steady just below her lips and her chest rises as she fills it with air. Deep blacks, one hot orange source, extreme contrast. The camera is locked off and static in one position and does not move at any point. Every surface in frame is plain and unmarked: bare fire brick, black steel, dark worn cloth and clear glass.\n\noverall_soundscape: One long steady human breath drawn in, close to the microphone, with the roar of a furnace well behind her. No music, no voices, no speech.\n\nnon_diegetic_music: N/A",
+   "width": 1344,
+   "height": 768,
+   "length": 124,
+   "ref_image_size": "match"
+  }
+ },
+ "6": {
+  "class_type": "BasicScheduler",
+  "inputs": {
+   "model": [
+    "16",
+    0
+   ],
+   "scheduler": "simple",
+   "steps": 8,
+   "denoise": 1.0
+  }
+ },
+ "7": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "res_multistep"
+  }
+ },
+ "8": {
+  "class_type": "BasicGuider",
+  "inputs": {
+   "model": [
+    "16",
+    0
+   ],
+   "conditioning": [
+    "5",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 20265911
+  }
+ },
+ "10": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "9",
+    0
+   ],
+   "guider": [
+    "8",
+    0
+   ],
+   "sampler": [
+    "7",
+    0
+   ],
+   "sigmas": [
+    "6",
+    0
+   ],
+   "latent_image": [
+    "5",
+    1
+   ]
+  }
+ },
+ "11": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "10",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "12": {
+  "class_type": "VAEDecodeAudio",
+  "inputs": {
+   "samples": [
+    "10",
+    0
+   ],
+   "vae": [
+    "4",
+    0
+   ]
+  }
+ },
+ "13": {
+  "class_type": "CreateVideo",
+  "inputs": {
+   "images": [
+    "11",
+    0
+   ],
+   "audio": [
+    "12",
+    0
+   ],
+   "fps": 24.0,
+   "bit_depth": 8
+  }
+ },
+ "14": {
+  "class_type": "SaveVideo",
+  "inputs": {
+   "video": [
+    "13",
+    0
+   ],
+   "filename_prefix": "video/h3_c21mcp_s07_breath_s20265911",
+   "format": "auto",
+   "codec": "auto"
+  }
+ },
+ "16": {
+  "class_type": "PathchSageAttentionKJ",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "sage_attention": "auto",
+   "allow_compile": false
+  }
+ }
+}

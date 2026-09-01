@@ -1,10 +1,13 @@
 # The commanded-transient carriers, and how to rebuild them
 
-> 🔴 **THESE CARRIERS ARE NOT USED BY `THE STORM`, THE FILM ON THE ENTRY PAGE.**
-> They belong to a **separate, earlier experiment** (working title *THE FUSE*). THE STORM binds no
-> reference audio at all — `ref_image` and `ref_audio` are unconnected in its graph — so every impact
-> you hear in that film is H3's own timing, not a written one. Keeping this page honest matters more
-> than keeping it tidy, so the two are labelled rather than merged.
+> 🔴 **NEITHER FILM ON THIS SITE USES THESE CARRIERS.**
+> The current entry, **[THE LAST HEAT](../)**, binds *voice* references (through `H3ZeroAudioPrefix`)
+> in 10 of its 18 graphs and binds **no carrier wav and no placed transient in any of them** — every
+> impact, the furnace and the ring are H3's own timing. The earlier film,
+> **[THE STORM](../storm.html)**, binds no reference at all: `ref_image` and `ref_audio` are
+> unconnected in its graph.
+> These wavs belong to a **separate, earlier experiment** (working title *THE FUSE*). Keeping this
+> page honest matters more than keeping it tidy, so the three are labelled rather than merged.
 
 **What these files are for.** A sound event written into a **reference wav** before any picture
 exists comes back in the render at the time you wrote it: H3 reproduces a transient in the bound
@@ -38,3 +41,37 @@ contains a silent run makes a defect the model will happily reproduce.
 165 888 samples, 85 dB below peak — with `gain = 0.548736572`, `decay = 0.848528137`, and the
 measured cue supplied as the `transient` input. **The film was rendered from the wavs in this
 directory**, built by `build_score.py`; the node is the in-graph equivalent.
+
+
+## Every file in this directory, downloadable
+
+GitHub Pages has no directory listing, so here they are explicitly.
+
+| script | |
+|---|---|
+| [`build_score.py`](build_score.py) | builds every wav below, plus a seed-matched null for each |
+
+| carrier wav | size |
+|---|--:|
+| [`f1_pane.wav`](f1_pane.wav) | 331,820 B |
+| [`f1_pane_null.wav`](f1_pane_null.wav) | 331,820 B |
+| [`f2_ceramic.wav`](f2_ceramic.wav) | 331,820 B |
+| [`f2_ceramic_null.wav`](f2_ceramic_null.wav) | 331,820 B |
+| [`f3_fruit.wav`](f3_fruit.wav) | 331,820 B |
+| [`f3_fruit_null.wav`](f3_fruit_null.wav) | 331,820 B |
+| [`f4_paint.wav`](f4_paint.wav) | 331,820 B |
+| [`f4_paint_null.wav`](f4_paint_null.wav) | 331,820 B |
+| [`f5_proof.wav`](f5_proof.wav) | 331,820 B |
+| [`f5_proof_null.wav`](f5_proof_null.wav) | 331,820 B |
+| [`f5b_proof.wav`](f5b_proof.wav) | 331,820 B |
+| [`f5b_proof_null.wav`](f5b_proof_null.wav) | 331,820 B |
+| [`f5c_bounce.wav`](f5c_bounce.wav) | 331,820 B |
+| [`f5c_bounce_null.wav`](f5c_bounce_null.wav) | 331,820 B |
+| [`f6_water.wav`](f6_water.wav) | 331,820 B |
+| [`f6_water_null.wav`](f6_water_null.wav) | 331,820 B |
+| [`f7_hold.wav`](f7_hold.wav) | 331,820 B |
+| [`f7_hold_null.wav`](f7_hold_null.wav) | 331,820 B |
+| [`f8_silent.wav`](f8_silent.wav) | 331,820 B |
+| [`f8_silent_null.wav`](f8_silent_null.wav) | 331,820 B |
+| [`f9_tick.wav`](f9_tick.wav) | 331,820 B |
+| [`f9_tick_null.wav`](f9_tick_null.wav) | 331,820 B |
