@@ -1,8 +1,17 @@
-# THE FUSE — the carriers, and how to rebuild them
+# The commanded-transient carriers, and how to rebuild them
 
-Every sound event in this film was written into a **reference wav** before any picture existed.
-H3 reproduces a transient written into the bound reference at the time you put it, so the rhythm is
-authored first and the model performs it.
+> 🔴 **THESE CARRIERS ARE NOT USED BY `THE STORM`, THE FILM ON THE ENTRY PAGE.**
+> They belong to a **separate, earlier experiment** (working title *THE FUSE*). THE STORM binds no
+> reference audio at all — `ref_image` and `ref_audio` are unconnected in its graph — so every impact
+> you hear in that film is H3's own timing, not a written one. Keeping this page honest matters more
+> than keeping it tidy, so the two are labelled rather than merged.
+
+**What these files are for.** A sound event written into a **reference wav** before any picture
+exists comes back in the render at the time you wrote it: H3 reproduces a transient in the bound
+reference at its authored position, so the rhythm can be authored first and the model performs it.
+That is the technique these wavs demonstrate, and it is measured — but ⚠️ **only within the first
+~3.02 s of a 124-frame render** (beats at or after ~3.35 s do not reproduce), and ⛔ the picture does
+**not** follow the score: a pre-registered test of that failed.
 
 ## What is here
 | file | what |
